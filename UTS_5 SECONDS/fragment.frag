@@ -1,8 +1,10 @@
 #version 330
 
+//variabel random color
 //uniform vec4 color1;
 //uniform vec4 color2;
 
+//variabel jarum-jarum
 uniform float currentSecondPointer;
 uniform float currentMinutePointer;
 uniform float currentHourPointer;
@@ -19,14 +21,10 @@ void main()
     float dotSecond = dot (normalize (vPos), vec2(cos (currentSecondPointer), sin (currentSecondPointer)));
 
     //drawing second
-
-    //panjang jarum
-    if (distance <= 0.9)
+    if (distance <= 0.9) //panjang jarum
     {
         color = vec4(1.0, 1.0, 1.0, 1.0);
-
-        //lebar jarum
-        if (dotSecond > 0.999) color = vec4(1.0, 0.0, 0.0, 1.0);
+        if (dotSecond > 0.999) /*lebar jarum*/ color = vec4(1.0, 0.0, 0.0, 1.0);
     }
 
     float dotMinute = dot (normalize (vPos), vec2(cos (currentMinutePointer), sin (currentMinutePointer)));
@@ -43,7 +41,7 @@ void main()
         color = vec4(0.0, 0.0, 1.0, 1.0);
     }
 
-
+    //randomcolor
     /*if (vPos.y < 0)
     {
         color = color1;

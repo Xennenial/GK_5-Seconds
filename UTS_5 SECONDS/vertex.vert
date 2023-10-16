@@ -1,5 +1,6 @@
 #version 330
 
+//variabel scale untuk mengirim posisi
 //uniform float scale;
 layout(location = 0) in vec3 inPosition;
 varying vec2 vPos;
