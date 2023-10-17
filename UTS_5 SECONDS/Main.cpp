@@ -52,9 +52,9 @@ float velocityMinutePointer = -0.295f;
 float velocityHourPointer = -0.0251;
 float speed = 1.0f;
 
-float currentSecondPointer = 270.0f;
-float currentMinutePointer = 270.0f;
-float currentHourPointer = 270.0f;
+float currentSecondPointer = 280.0f;
+float currentMinutePointer = 280.0f;
+float currentHourPointer = 280.0f;
 
 float currentTime = 0.0f;
 float lastTime = 0.0f;
