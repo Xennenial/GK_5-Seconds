@@ -47,9 +47,9 @@ unsigned int program;
 /*
 */
 
-float velocitySecondPointer = -18.0f;;
-float velocityMinutePointer = -0.295f;
-float velocityHourPointer = -0.0251;
+float velocitySecondPointer = -18.0f;
+float velocityMinutePointer = -0.3f;
+float velocityHourPointer = -0.03f;
 float speed = 1.0f;
 
 float currentSecondPointer = 280.0f;
@@ -59,6 +59,20 @@ float currentHourPointer = 280.0f;
 float currentTime = 0.0f;
 float lastTime = 0.0f;
 float deltaTime = 0.0f;
+
+//Key Forward-Backward Hour
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    if (key == GLFW_KEY_1 && action == GLFW_PRESS) {
+        cout << "Jam dimajukan" << endl;
+        currentHourPointer -= 93.8f;
+        currentTime = currentTime;
+    }
+    if (key == GLFW_KEY_2 && action == GLFW_PRESS) {
+        cout << "Jam dimundurkan" << endl;
+        currentHourPointer += 94.5f;
+        currentTime = currentTime;
+    }
+}
 
 int main(void)
 {
@@ -79,7 +93,8 @@ int main(void)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
-
+    //Input Key
+    glfwSetKeyCallback(window, keyCallback);
 
     GLenum err = glewInit();
 
@@ -110,7 +125,7 @@ int main(void)
     glGenBuffers(1, &indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 6, indexArr, GL_STATIC_DRAW);
-    
+
 
     string vertexString = readFile("vertex.vert");
     string fragmentString = readFile("fragment.frag");
@@ -139,17 +154,17 @@ int main(void)
     GLint currentMinutePointerLoc = glGetUniformLocation(program, "currentMinutePointer");
     GLint currentHourPointerLoc = glGetUniformLocation(program, "currentHourPointer");
 
-   //variabel untuk ganti warna random
-   // GLint scaleloc = glGetUniformLocation(program, "scale");
-   // glUniform1f(scaleloc, 0.5f);
+    //variabel untuk ganti warna random
+    // GLint scaleloc = glGetUniformLocation(program, "scale");
+    // glUniform1f(scaleloc, 0.5f);
 
-   // color1loc = glGetUniformLocation(program, "color1");
-   // glUniform4f(color1loc, color1[0], color1[1], color1[2], color1[3]);
+    // color1loc = glGetUniformLocation(program, "color1");
+    // glUniform4f(color1loc, color1[0], color1[1], color1[2], color1[3]);
 
-    //color2loc = glGetUniformLocation(program, "color2");
-    //glUniform4f(color2loc, color2[0], color2[1], color2[2], color2[3]);
+     //color2loc = glGetUniformLocation(program, "color2");
+     //glUniform4f(color2loc, color2[0], color2[1], color2[2], color2[3]);
 
-    /* Loop until the user closes the window */
+     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         currentTime = glfwGetTime();
@@ -167,7 +182,7 @@ int main(void)
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glDrawElements(GL_TRIANGLES,6, GL_UNSIGNED_INT, nullptr);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
         //glfwSetKeyCallback(window, keyCallback);
 
