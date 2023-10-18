@@ -39,7 +39,7 @@ unsigned int program;
 /*
 */
 
-//key mempercepat/memperlambat dan mereset kecepatan jam (buat +/- 0.10x per key ditekan)
+//key mempercepat/memperlambat dan mereset kecepatan jam (buat +/- 1.0x per key ditekan)
 /*
 */
 
@@ -47,9 +47,9 @@ unsigned int program;
 /*
 */
 
-float velocitySecondPointer = -18.0f;
-float velocityMinutePointer = -0.3f;
-float velocityHourPointer = -0.03f;
+float velocitySecondPointer = -18.8571428571f;
+float velocityMinutePointer =  -0.3142857143f;
+float velocityHourPointer = -0.000436508f;
 float speed = 1.0f;
 
 float currentSecondPointer = 280.0f;
@@ -89,7 +89,7 @@ int main(void)
         glfwTerminate();
         return -1;
     }
-
+    
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
@@ -167,6 +167,9 @@ int main(void)
      /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
+        /* Render here */
+        glClear(GL_COLOR_BUFFER_BIT);
+
         currentTime = glfwGetTime();
         deltaTime = (currentTime - lastTime) * speed;
         lastTime = currentTime;
@@ -178,9 +181,6 @@ int main(void)
         glUniform1f(currentSecondPointerLoc, currentSecondPointer / 180.0f);
         glUniform1f(currentMinutePointerLoc, currentMinutePointer / 180.0f);
         glUniform1f(currentHourPointerLoc, currentHourPointer / 180.0f);
-
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
