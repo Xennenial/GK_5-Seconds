@@ -47,6 +47,8 @@ unsigned int program;
 /*
 */
 
+
+//kecepatan jarum
 float velocitySecondPointer = -18.0f;;
 float velocityMinutePointer = -0.295f;
 float velocityHourPointer = -0.0251;
