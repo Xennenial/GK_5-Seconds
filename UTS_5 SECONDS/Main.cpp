@@ -63,8 +63,8 @@ float loadingTimeSecond = 60.0f;
 float loadingTimeMinute = 360.0f;
 float loadingTimeHour = 43200.0f;
 
-//Key Forward-Backward Hour
-void keyFowardBackwardHour(GLFWwindow* window, int key, int scancode, int action, int mods) {
+//Key Forward-Backward Hour and Minute, Speed Control
+void keyFowardBackward(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (key == GLFW_KEY_W && action == GLFW_PRESS) {
         cout << "Jam dimajukan" << endl;
         currentHourPointer -= 94.28571428571429f;
@@ -75,24 +75,33 @@ void keyFowardBackwardHour(GLFWwindow* window, int key, int scancode, int action
         currentHourPointer += 94.28571428571429f;
         currentTime = currentTime;
     }
-}
-
-//Key Speed Controller
-void keySpeedController(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (key == GLFW_KEY_D && action == GLFW_PRESS) {
+            cout << "Menit dimajukan" << endl;
+            currentMinutePointer -= 18.85714285714286f;
+            currentHourPointer -= 1.571428571428571f;
+            currentTime = currentTime;
+    }
+    if (key == GLFW_KEY_S && action == GLFW_PRESS) {
+            cout << "Menit dimundurkan" << endl;
+            currentHourPointer += 18.85714285714286f;
+            currentHourPointer += 1.571428571428571f;
+            currentTime = currentTime;
+    }
+    if (key == GLFW_KEY_2 && action == GLFW_PRESS) {
         cout << "Kecepatan Bertambah" << endl;
         speed += 1.0f;
     }
-    if (key == GLFW_KEY_A && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_1 && action == GLFW_PRESS) {
         cout << "Kecepatan Berkurang" << endl;
         speed -= 1.0f;
     }
     if (key == GLFW_KEY_R && action == GLFW_PRESS) {
         cout << "Kecepatan Kembali Normal" << endl;
         speed = 1.0f;
-    } 
+    }
 }
 
+//Key Speed Controller
 
 int main(void)
 {
@@ -114,8 +123,7 @@ int main(void)
     glfwMakeContextCurrent(window);
 
     //Input Key
-    glfwSetKeyCallback(window, keyFowardBackwardHour);
-    glfwSetKeyCallback(window, keySpeedController);
+    glfwSetKeyCallback(window, keyFowardBackward);
 
     GLenum err = glewInit();
 

@@ -24,7 +24,6 @@ void main()
     //drawing second
     if (distance <= 1.00 && distance >= 0.80) //panjang jarum
     {
-        color = vec4(1.0, 1.0, 1.0, 1.0);
         if (dotSecond > 0.999) /*lebar jarum*/ color = vec4(1.0, 0.0, 0.0, 1.0);
     }
 
@@ -32,7 +31,6 @@ void main()
     //drawing minute
     if (distance >= 0.50 && distance <= 0.70)
     {
-        color = vec4(1.0, 1.0, 1.0, 1.0);
         if (dotMinute > 0.995)
         color = vec4(0.0, 1.0, 0.0, 1.0);
     }
@@ -41,7 +39,6 @@ void main()
     //drawing hour
     if (distance >= 0.20 && distance <= 0.40)
     {
-        color = vec4(1.0, 1.0, 1.0, 1.0);
         if (dotHour > 0.999)
         color = vec4(0.0, 0.0, 1.0, 1.0);
     }
