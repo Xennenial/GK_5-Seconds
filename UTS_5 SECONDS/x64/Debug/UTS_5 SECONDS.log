@@ -1,1 +1,1 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(439,5): error MSB8020: The build tools for v143 (Platform Toolset = 'v143') cannot be found. To build using the v143 build tools, please install v143 build tools.  Alternatively, you may upgrade to the current Visual Studio tools by selecting the Project menu or right-click the solution, and then selecting "Retarget solution".
+﻿  UTS_5 SECONDS.vcxproj -> D:\Elin\kuliah\Semester 5\GK\GK_5-Seconds\Fixed\GK_5-Seconds\UTS_5 SECONDS\x64\Debug\UTS_5 SECONDS.exe
