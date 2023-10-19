@@ -7,46 +7,7 @@
 
 using namespace std;
 
-//float color1[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-//float color2[] = { 1.0f, 0.0f, 0.0f, 1.0f };
-
 unsigned int program;
-//GLint color1loc, color2loc;
-
-//key ganti warna random
-/*void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-    if (key == GLFW_KEY_C && action == GLFW_PRESS)
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            color1[i] = (rand() * 1.0f) / RAND_MAX;
-            color2[i] = (rand() * 1.0f) / RAND_MAX;
-        }
-
-        cout << color1[0] << " " << color1[1] << " " << color1[2] << " " << color1[3] << endl;
-        cout << color2[0] << " " << color2[1] << " " << color2[2] << " " << color2[3] << endl;
-
-        glUniform4f(color1loc, color1[0], color1[1], color1[2], color1[3]);
-        glUniform4f(color2loc, color2[0], color2[1], color2[2], color2[3]);
-    }
-}*/
-
-//key memaju/memundurkan jam buat tambah/kurang 
-/*
-*/
-
-//key memaju/memundurkan menit
-/*
-*/
-
-//key mempercepat/memperlambat dan mereset kecepatan jam (buat +/- 1.0x per key ditekan)
-/*
-*/
-
-//membuat pengguna dapat memasukkan waktu yang spesifik dengan mengubah satu variabel pada program
-/*
-*/
 
 float velocitySecondPointer = -3.0f;
 float velocityMinutePointer = -0.05f;
@@ -67,29 +28,22 @@ int Hour;
 int Minute;
 int Second;
 
-//Key Forward-Backward Hour and Minute, Speed Control
 void keyFowardBackward(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
         cout << "Jam dimajukan" << endl;
-        currentHourPointer -= 94.28571428571429f;
-        currentTime = currentTime;
+        glfwSetTime(currentTime + 3600);
     }
     if (key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
         cout << "Jam dimundurkan" << endl;
-        currentHourPointer += 94.28571428571429f;
-        currentTime = currentTime;
+        glfwSetTime(currentTime - 3600);
     }
     if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
-            cout << "Menit dimajukan" << endl;
-            currentMinutePointer -= 18.85714285714286f;
-            currentHourPointer -= 1.571428571428571f;
-            currentTime = currentTime;
+        cout << "Menit dimajukan" << endl;
+        glfwSetTime(currentTime + 60);
     }
     if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
-            cout << "Menit dimundurkan" << endl;
-            currentMinutePointer += 18.85714285714286f;
-            currentHourPointer += 1.571428571428571f;
-            currentTime = currentTime;
+        cout << "Menit dimundurkan" << endl;
+        glfwSetTime(currentTime - 60);
     }
     if (key == GLFW_KEY_2 && action == GLFW_PRESS) {
         cout << "Kecepatan Bertambah" << endl;
@@ -135,45 +89,22 @@ void keyFowardBackward(GLFWwindow* window, int key, int scancode, int action, in
         cout << "Detik : ";
         cin >> Second;
 
-        // Calculate the angle for the second hand
-        currentSecondPointer = (Second / 60) * (2 * 3.14159265358979323846 / 60);
+        float hour = Hour * 3600;
+        float minute = Minute * 60;
+        float second = Second;
 
-        // Calculate the angle for the minute hand, including the seconds
-        currentMinutePointer = (Minute / 60) * (2 * 3.14159265358979323846 / 60) + currentSecondPointer / 60;
-
-        // Calculate the angle for the hour hand, including the minutes and seconds
-        currentHourPointer = (Hour / 12) * (2 * 3.14159265358979323846 / 12) + currentMinutePointer / 12 + currentSecondPointer / 720;
+        glfwSetTime(hour + minute + second);
+        cout << "Time Changed Successfully" << endl;
     }
 }
-
-/* User Menentukan Waktu??
-void DeclareTime() {
-    cout << "Ingin Menentukan Jam (Y/N): " << endl;
-    cin >> Decision;
-    Decision = toupper(Decision);
-
-    if (Decision == 'Y') {
-        cout << "Masukkan Jam, Menit, dan Detik: ";
-        cin >> Hour >> Minute >> Second;
-
-        currentSecondPointer += Second * -18.85714285714286f;
-        currentMinutePointer += (Minute * -18.85714285714286f) + (Second * -0.3142857143f);
-        currentHourPointer += (Hour * -94.28571428571429f) + (Minute * -1.571428571428571f) + (Second * -0.000436508f);
-    }
-}
-*/
-
-//Key Speed Controller
 
 int main(void)
 {
     GLFWwindow* window;
 
-    /* Initialize the library */
     if (!glfwInit())
         return -1;
 
-    /* Create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(640, 640, "JAM BIG BANG", NULL, NULL);
     if (!window)
     {
@@ -181,10 +112,8 @@ int main(void)
         return -1;
     }
     
-    /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
-    //Input Key
     glfwSetKeyCallback(window, keyFowardBackward);
 
     GLenum err = glewInit();

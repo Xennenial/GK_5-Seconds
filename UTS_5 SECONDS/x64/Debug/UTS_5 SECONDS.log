@@ -1,6 +1,1 @@
-﻿  Main.cpp
-D:\Document\Kuliah\Semester 5\GK\GK_5-Seconds\UTS_5 SECONDS\Main.cpp(139,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Document\Kuliah\Semester 5\GK\GK_5-Seconds\UTS_5 SECONDS\Main.cpp(142,82): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Document\Kuliah\Semester 5\GK\GK_5-Seconds\UTS_5 SECONDS\Main.cpp(145,106): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Document\Kuliah\Semester 5\GK\GK_5-Seconds\UTS_5 SECONDS\Main.cpp(250,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  UTS_5 SECONDS.vcxproj -> D:\Document\Kuliah\Semester 5\GK\GK_5-Seconds\UTS_5 SECONDS\x64\Debug\UTS_5 SECONDS.exe
+﻿  UTS_5 SECONDS.vcxproj -> D:\Document\Kuliah\Semester 5\GK\GK_5-Seconds\UTS_5 SECONDS\x64\Debug\UTS_5 SECONDS.exe
