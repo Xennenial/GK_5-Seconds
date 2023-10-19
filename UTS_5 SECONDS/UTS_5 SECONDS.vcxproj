@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\Elin\kuliah\Semester 5\GK\glew-2.1.0-win32\glew-2.1.0\include;D:\Elin\kuliah\Semester 5\GK\glfw-3.3.8.bin.WIN64\glfw-3.3.8.bin.WIN64\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Elin\kuliah\Semester 5\GK\glew-2.1.0-win32\glew-2.1.0\lib\Release\x64;D:\Elin\kuliah\Semester 5\GK\glfw-3.3.8.bin.WIN64\glfw-3.3.8.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Document\Kuliah\Semester 5\GK\GK_5-Seconds\UTS_5 SECONDS\LibraryDependencies\GLEW\include;D:\Document\Kuliah\Semester 5\GK\GK_5-Seconds\UTS_5 SECONDS\LibraryDependencies\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Document\Kuliah\Semester 5\GK\GK_5-Seconds\UTS_5 SECONDS\LibraryDependencies\GLEW\lib;D:\Document\Kuliah\Semester 5\GK\GK_5-Seconds\UTS_5 SECONDS\LibraryDependencies\lib-vc2019;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>D:\Elin\kuliah\Semester 5\GK\glew-2.1.0-win32\glew-2.1.0\include;D:\Elin\kuliah\Semester 5\GK\glfw-3.3.8.bin.WIN64\glfw-3.3.8.bin.WIN64\include;$(IncludePath)</IncludePath>
