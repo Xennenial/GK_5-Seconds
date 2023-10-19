@@ -19,28 +19,29 @@ void main()
     color = vec4(1.0, 1.0, 1.0, 1.0);
 
     float distance = length (vPos);
-    float dotSecond = dot (normalize (vPos), vec2(cos (currentSecondPointer), sin (currentSecondPointer)));
+    
 
     //drawing second
-    if (distance <= 1.00 && distance >= 0.80) //panjang jarum
+    float dotHour = dot (normalize (vPos), vec2(cos (currentHourPointer), sin (currentHourPointer)));
+    if (distance <= 0.90 && distance >= 0.80) //panjang jarum
     {
-        if (dotSecond > 0.999) /*lebar jarum*/ color = vec4(1.0, 0.0, 0.0, 1.0);
+        if (dotHour > 0.999)
+        color = vec4(1.0, 0.0, 0.0, 1.0);
     }
 
     float dotMinute = dot (normalize (vPos), vec2(cos (currentMinutePointer), sin (currentMinutePointer)));
     //drawing minute
-    if (distance >= 0.50 && distance <= 0.70)
+    if (distance >= 0.50 && distance <= 0.60)
     {
         if (dotMinute > 0.995)
         color = vec4(0.0, 1.0, 0.0, 1.0);
     }
 
-    float dotHour = dot (normalize (vPos), vec2(cos (currentHourPointer), sin (currentHourPointer)));
+    float dotSecond = dot (normalize (vPos), vec2(cos (currentSecondPointer), sin (currentSecondPointer)));
     //drawing hour
-    if (distance >= 0.20 && distance <= 0.40)
+    if (distance >= 0.20 && distance <= 0.30)
     {
-        if (dotHour > 0.999)
-        color = vec4(0.0, 0.0, 1.0, 1.0);
+        if (dotSecond < 1.0) /*lebar jarum*/ color = vec4(0.0, 0.0, 1.0, 1.0);
     }
 
     //randomcolor

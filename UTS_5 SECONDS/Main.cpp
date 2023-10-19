@@ -111,6 +111,11 @@ void keyFowardBackward(GLFWwindow* window, int key, int scancode, int action, in
             tempspeed = 1.0f;
         }
     }
+    if (key == GLFW_KEY_R && action == GLFW_PRESS) {
+        cout << "Kecepatan Kembali Normal" << endl;
+        speed = 1.0f;
+        tempspeed = 1.0f;
+    }
     if (key == GLFW_KEY_P && action == GLFW_PRESS) {
         if (speed > 0.0f) {
             cout << "Pause"<<endl;

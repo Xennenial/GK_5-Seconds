@@ -1,6 +1,1 @@
-﻿  Main.cpp
-D:\Elin\kuliah\Semester 5\GK\GK_5-Seconds\Fixed\GK_5-Seconds\UTS_5 SECONDS\Main.cpp(241,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-glew32s.lib(glew.obj) : warning LNK4099: PDB '' was not found with 'glew32s.lib(glew.obj)' or at ''; linking object as if no debug info
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  UTS_5 SECONDS.vcxproj -> D:\Elin\kuliah\Semester 5\GK\GK_5-Seconds\Fixed\GK_5-Seconds\UTS_5 SECONDS\x64\Debug\UTS_5 SECONDS.exe
+﻿  UTS_5 SECONDS.vcxproj -> D:\Elin\kuliah\Semester 5\GK\GK_5-Seconds\Fixed\GK_5-Seconds\UTS_5 SECONDS\x64\Debug\UTS_5 SECONDS.exe
