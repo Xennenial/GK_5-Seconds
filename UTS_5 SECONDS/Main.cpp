@@ -64,12 +64,12 @@ float deltaTime = 0.0f;
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (key == GLFW_KEY_1 && action == GLFW_PRESS) {
         cout << "Jam dimajukan" << endl;
-        currentHourPointer -= 93.8f;
+        currentHourPointer -= 94.28571428571429f;
         currentTime = currentTime;
     }
     if (key == GLFW_KEY_2 && action == GLFW_PRESS) {
         cout << "Jam dimundurkan" << endl;
-        currentHourPointer += 94.5f;
+        currentHourPointer += 94.28571428571429f;
         currentTime = currentTime;
     }
 }
