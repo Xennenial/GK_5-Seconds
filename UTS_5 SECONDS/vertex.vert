@@ -1,12 +1,10 @@
 #version 330
 
-//variabel scale untuk mengirim posisi
-//uniform float scale;
-layout(location = 0) in vec3 inPosition;
+layout (location = 0) in vec2 pos;
 varying vec2 vPos;
 
 void main()
 {
-    gl_Position = vec4(inPosition.xy /* * scale */, 0.0, 1.0);
-    vPos = inPosition.xy;
+	gl_Position = vec4(pos.xy, 0.0, 1.0);
+	vPos = pos.xy;
 }

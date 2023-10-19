@@ -48,22 +48,19 @@ unsigned int program;
 /*
 */
 
-float velocitySecondPointer = -18.8571428571f;
-float velocityMinutePointer =  -0.3142857143f;
-float velocityHourPointer = -0.000436508f;
+float velocitySecondPointer = -3.0f;
+float velocityMinutePointer = -0.05f;
+float velocityHourPointer = -0.0042222222f;
 float speed = 1.0f;
 float tempspeed = 1.0f;
 
-float currentSecondPointer = 280.0f;
-float currentMinutePointer = 280.0f;
-float currentHourPointer = 280.0f;
+float currentSecondPointer = 270.0f;
+float currentMinutePointer = 270.0f;
+float currentHourPointer = 270.0f;
 
 float currentTime = 0.0f;
 float lastTime = 0.0f;
 float deltaTime = 0.0f;
-float loadingTimeSecond = 60.0f;
-float loadingTimeMinute = 360.0f;
-float loadingTimeHour = 43200.0f;
 
 char Decision;
 int Hour;
@@ -72,23 +69,23 @@ int Second;
 
 //Key Forward-Backward Hour and Minute, Speed Control
 void keyFowardBackward(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    if (key == GLFW_KEY_W && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
         cout << "Jam dimajukan" << endl;
         currentHourPointer -= 94.28571428571429f;
         currentTime = currentTime;
     }
-    if (key == GLFW_KEY_S && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
         cout << "Jam dimundurkan" << endl;
         currentHourPointer += 94.28571428571429f;
         currentTime = currentTime;
     }
-    if (key == GLFW_KEY_D && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
             cout << "Menit dimajukan" << endl;
             currentMinutePointer -= 18.85714285714286f;
             currentHourPointer -= 1.571428571428571f;
             currentTime = currentTime;
     }
-    if (key == GLFW_KEY_A && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
             cout << "Menit dimundurkan" << endl;
             currentMinutePointer += 18.85714285714286f;
             currentHourPointer += 1.571428571428571f;
@@ -125,6 +122,27 @@ void keyFowardBackward(GLFWwindow* window, int key, int scancode, int action, in
             cout << "Continue"<<endl;
             speed = tempspeed;
         }
+    }
+
+    if (key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
+        cout << "Input Time : \n";
+        cout << "Jam : ";
+        cin >> Hour;
+
+        cout << "Menit : ";
+        cin >> Minute;
+
+        cout << "Detik : ";
+        cin >> Second;
+
+        // Calculate the angle for the second hand
+        currentSecondPointer = (Second / 60) * (2 * 3.14159265358979323846 / 60);
+
+        // Calculate the angle for the minute hand, including the seconds
+        currentMinutePointer = (Minute / 60) * (2 * 3.14159265358979323846 / 60) + currentSecondPointer / 60;
+
+        // Calculate the angle for the hour hand, including the minutes and seconds
+        currentHourPointer = (Hour / 12) * (2 * 3.14159265358979323846 / 12) + currentMinutePointer / 12 + currentSecondPointer / 720;
     }
 }
 
@@ -172,11 +190,11 @@ int main(void)
     GLenum err = glewInit();
 
     float vertices[] = {
-    1.0, 1.0,
-    -1.0, 1.0,
-    -1.0, -1.0,
-    1.0, -1.0
-    };
+        1.0f, 1.0f,
+        -1.0f, 1.0f,
+        -1.0f, -1.0f,
+        1.0f, -1.0f
+     };
 
     unsigned int indexArr[] = {
         0,1,2,
@@ -227,52 +245,23 @@ int main(void)
     GLint currentMinutePointerLoc = glGetUniformLocation(program, "currentMinutePointer");
     GLint currentHourPointerLoc = glGetUniformLocation(program, "currentHourPointer");
 
-    //variabel untuk ganti warna random
-    // GLint scaleloc = glGetUniformLocation(program, "scale");
-    // glUniform1f(scaleloc, 0.5f);
-
-    // color1loc = glGetUniformLocation(program, "color1");
-    // glUniform4f(color1loc, color1[0], color1[1], color1[2], color1[3]);
-
-     //color2loc = glGetUniformLocation(program, "color2");
-     //glUniform4f(color2loc, color2[0], color2[1], color2[2], color2[3]);
-
-     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
-
         currentTime = glfwGetTime();
         deltaTime = (currentTime - lastTime) * speed;
         lastTime = currentTime;
 
-        currentSecondPointer = currentSecondPointer + (deltaTime * velocitySecondPointer);
-        currentMinutePointer = currentMinutePointer + (deltaTime * velocityMinutePointer);
-        currentHourPointer = currentHourPointer + (deltaTime * velocityHourPointer);
+        currentSecondPointer += (deltaTime * velocitySecondPointer);
+        currentMinutePointer += (deltaTime * velocityMinutePointer);
+        currentHourPointer += (deltaTime * velocityHourPointer);
 
-        glUniform1f(currentSecondPointerLoc, currentSecondPointer / 180.0f);
-        glUniform1f(currentMinutePointerLoc, currentMinutePointer / 180.0f);
-        glUniform1f(currentHourPointerLoc, currentHourPointer / 180.0f);
+        glUniform1f(currentSecondPointerLoc, currentSecondPointer * 3.14159265f / 180.0f);
+        glUniform1f(currentMinutePointerLoc, currentMinutePointer * 3.14159265f / 180.0f);
+        glUniform1f(currentHourPointerLoc, currentHourPointer * 3.14159265f / 180.0f);
 
+
+        glClear(GL_COLOR_BUFFER_BIT);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-
-        //glfwSetKeyCallback(window, keyCallback);
-
-        // glDrawArrays(GL_TRIANGLES, 0, 6);
-
-
-        /*
-        glColor3f(1.0f, 0.0f,0.0f);
-        glBegin(GL_TRIANGLES);
-        glVertex2f(0.0f, 0.5f);
-        glVertex2f(-0.5f, -0.5f);
-        glVertex2f(0.5f, -0.5f);
-        glEnd();
-
-        */
-
-
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
