@@ -1,6 +1,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include<iostream>
+#include <iostream>
+#include <string>
 
 #include "Util.h"
 
@@ -51,6 +52,7 @@ float velocitySecondPointer = -18.8571428571f;
 float velocityMinutePointer =  -0.3142857143f;
 float velocityHourPointer = -0.000436508f;
 float speed = 1.0f;
+float tempspeed = 1.0f;
 
 float currentSecondPointer = 280.0f;
 float currentMinutePointer = 280.0f;
@@ -62,6 +64,11 @@ float deltaTime = 0.0f;
 float loadingTimeSecond = 60.0f;
 float loadingTimeMinute = 360.0f;
 float loadingTimeHour = 43200.0f;
+
+char Decision;
+int Hour;
+int Minute;
+int Second;
 
 //Key Forward-Backward Hour and Minute, Speed Control
 void keyFowardBackward(GLFWwindow* window, int key, int scancode, int action, int mods) {
@@ -81,25 +88,57 @@ void keyFowardBackward(GLFWwindow* window, int key, int scancode, int action, in
             currentHourPointer -= 1.571428571428571f;
             currentTime = currentTime;
     }
-    if (key == GLFW_KEY_S && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_A && action == GLFW_PRESS) {
             cout << "Menit dimundurkan" << endl;
-            currentHourPointer += 18.85714285714286f;
+            currentMinutePointer += 18.85714285714286f;
             currentHourPointer += 1.571428571428571f;
             currentTime = currentTime;
     }
     if (key == GLFW_KEY_2 && action == GLFW_PRESS) {
         cout << "Kecepatan Bertambah" << endl;
         speed += 1.0f;
+        tempspeed += 1.0f;
     }
     if (key == GLFW_KEY_1 && action == GLFW_PRESS) {
         cout << "Kecepatan Berkurang" << endl;
-        speed -= 1.0f;
+        speed -= 0.1f;
+        tempspeed -= 0.1f;
+
+        if (speed < 0.0f) {
+            cout << "Kecepatan Sudah Mencapai Minimum" << endl;
+            cout << "Kecepatan Kembali Normal";
+            speed = 1.0f;
+            tempspeed = 1.0f;
+        }
     }
-    if (key == GLFW_KEY_R && action == GLFW_PRESS) {
-        cout << "Kecepatan Kembali Normal" << endl;
-        speed = 1.0f;
+    if (key == GLFW_KEY_P && action == GLFW_PRESS) {
+        if (speed > 0.0f) {
+            cout << "Pause"<<endl;
+            speed = 0.0f; 
+        }
+        else {
+            cout << "Continue"<<endl;
+            speed = tempspeed;
+        }
     }
 }
+
+/* User Menentukan Waktu??
+void DeclareTime() {
+    cout << "Ingin Menentukan Jam (Y/N): " << endl;
+    cin >> Decision;
+    Decision = toupper(Decision);
+
+    if (Decision == 'Y') {
+        cout << "Masukkan Jam, Menit, dan Detik: ";
+        cin >> Hour >> Minute >> Second;
+
+        currentSecondPointer += Second * -18.85714285714286f;
+        currentMinutePointer += (Minute * -18.85714285714286f) + (Second * -0.3142857143f);
+        currentHourPointer += (Hour * -94.28571428571429f) + (Minute * -1.571428571428571f) + (Second * -0.000436508f);
+    }
+}
+*/
 
 //Key Speed Controller
 
