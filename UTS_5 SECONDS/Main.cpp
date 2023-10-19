@@ -59,20 +59,40 @@ float currentHourPointer = 280.0f;
 float currentTime = 0.0f;
 float lastTime = 0.0f;
 float deltaTime = 0.0f;
+float loadingTimeSecond = 60.0f;
+float loadingTimeMinute = 360.0f;
+float loadingTimeHour = 43200.0f;
 
 //Key Forward-Backward Hour
-void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    if (key == GLFW_KEY_1 && action == GLFW_PRESS) {
+void keyFowardBackwardHour(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    if (key == GLFW_KEY_W && action == GLFW_PRESS) {
         cout << "Jam dimajukan" << endl;
         currentHourPointer -= 94.28571428571429f;
         currentTime = currentTime;
     }
-    if (key == GLFW_KEY_2 && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_S && action == GLFW_PRESS) {
         cout << "Jam dimundurkan" << endl;
         currentHourPointer += 94.28571428571429f;
         currentTime = currentTime;
     }
 }
+
+//Key Speed Controller
+void keySpeedController(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    if (key == GLFW_KEY_D && action == GLFW_PRESS) {
+        cout << "Kecepatan Bertambah" << endl;
+        speed += 1.0f;
+    }
+    if (key == GLFW_KEY_A && action == GLFW_PRESS) {
+        cout << "Kecepatan Berkurang" << endl;
+        speed -= 1.0f;
+    }
+    if (key == GLFW_KEY_R && action == GLFW_PRESS) {
+        cout << "Kecepatan Kembali Normal" << endl;
+        speed = 1.0f;
+    } 
+}
+
 
 int main(void)
 {
@@ -94,7 +114,8 @@ int main(void)
     glfwMakeContextCurrent(window);
 
     //Input Key
-    glfwSetKeyCallback(window, keyCallback);
+    glfwSetKeyCallback(window, keyFowardBackwardHour);
+    glfwSetKeyCallback(window, keySpeedController);
 
     GLenum err = glewInit();
 
