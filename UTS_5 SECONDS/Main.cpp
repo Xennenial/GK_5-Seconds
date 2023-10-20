@@ -3,98 +3,108 @@
 #include <iostream>
 #include <string>
 
-#include "Util.h"
+#include "util.h"
+#include "constanta.h"
 
 using namespace std;
 
 unsigned int program;
 
-float velocitySecondPointer = -3.0f;
-float velocityMinutePointer = -0.05f;
-float velocityHourPointer = -0.0042222222f;
-float speed = 1.0f;
-float tempspeed = 1.0f;
+void keyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    //key TAB to changed time base on user input
+    if (key == GLFW_KEY_TAB && action == GLFW_PRESS) {
+        cout << "Input Time: " << endl;
+        cout << "Hour: ";
+        cin >> Hour;
 
-float currentSecondPointer = 270.0f;
-float currentMinutePointer = 270.0f;
-float currentHourPointer = 270.0f;
+        cout << "Minute: ";
+        cin >> Minute;
 
-float currentTime = 0.0f;
-float lastTime = 0.0f;
-float deltaTime = 0.0f;
+        cout << "Second: ";
+        cin >> Second;
 
-char Decision;
-int Hour;
-int Minute;
-int Second;
-
-void keyFowardBackward(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
-        cout << "Jam dimajukan" << endl;
+        //multiply the Hour and Minute by the number of seconds per hour and minute
+        glfwSetTime((Hour * 3600) + (Minute * 60) + Second);
+        cout << "Time has Changed" << endl;
+    }
+    //key W to move one hour foward
+    if (key == GLFW_KEY_W && action == GLFW_PRESS) {
+        cout << "Hour Foward" << endl;
         glfwSetTime(currentTime + 3600);
     }
-    if (key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
-        cout << "Jam dimundurkan" << endl;
+    //key S to move one hour backward
+    if (key == GLFW_KEY_S && action == GLFW_PRESS) {
+        cout << "Hour Backward" << endl;
         glfwSetTime(currentTime - 3600);
     }
-    if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
-        cout << "Menit dimajukan" << endl;
+    //key A to move one minute foward
+    if (key == GLFW_KEY_A && action == GLFW_PRESS) {
+        cout << "Minute Foward" << endl;
         glfwSetTime(currentTime + 60);
     }
-    if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
-        cout << "Menit dimundurkan" << endl;
+    //key D to move one minute backward
+    if (key == GLFW_KEY_D && action == GLFW_PRESS) {
+        cout << "Minute Backward" << endl;
         glfwSetTime(currentTime - 60);
     }
-    if (key == GLFW_KEY_2 && action == GLFW_PRESS) {
-        cout << "Kecepatan Bertambah" << endl;
+    //key RIGHT ARROW to speed up the clock
+    if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
+        cout << "Clock Speed Up" << endl;
         speed += 1.0f;
+        //tempspeed have the same value with speed
         tempspeed += 1.0f;
     }
-    if (key == GLFW_KEY_1 && action == GLFW_PRESS) {
-        cout << "Kecepatan Berkurang" << endl;
+    //key LEFT ARROW to slow down the clock
+    if (key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
+        cout << "Clock Slow Down" << endl;
         speed -= 0.1f;
         tempspeed -= 0.1f;
 
+        //speed can't be less than 0.0 if speed less than 0.0, speed value will be reseted
         if (speed < 0.0f) {
-            cout << "Kecepatan Sudah Mencapai Minimum" << endl;
-            cout << "Kecepatan Kembali Normal";
+            cout << "Clock Speed Reached Minumum Speed" << endl;
+            cout << "Speed Reseted";
             speed = 1.0f;
             tempspeed = 1.0f;
         }
     }
+    //Key R to reset speed
     if (key == GLFW_KEY_R && action == GLFW_PRESS) {
-        cout << "Kecepatan Kembali Normal" << endl;
+        cout << "Speed Reseted" << endl;
         speed = 1.0f;
         tempspeed = 1.0f;
     }
+    //Key P to pause the clock for a while 
     if (key == GLFW_KEY_P && action == GLFW_PRESS) {
+        //if Speed value is not 0 (clock is not on 'pause' condition, Speed value is changed to 0
         if (speed > 0.0f) {
             cout << "Pause"<<endl;
             speed = 0.0f; 
         }
+        //if Speed value is 0 (clock is on 'pause' condition, Speed value is changed to tempspeed
         else {
             cout << "Continue"<<endl;
             speed = tempspeed;
         }
     }
+    //key C to change clock's color: Hour, Minute, and Second
+    if (key == GLFW_KEY_C && action == GLFW_PRESS) {
+        cout << "Colors Have Changed" << endl;
+        
+        //Looping condition to generate random number for color between min number (0.0) to max number (1.0);
+        for (int i = 0; i < 4; i++) {
+            colorSecond[i] = (rand() * 1.0f) / RAND_MAX;
+            colorMinute[i] = (rand() * 1.0f) / RAND_MAX;
+            colorHour[i] = (rand() * 1.0f) / RAND_MAX;
+        }
+        
+        cout << colorSecond[0] << " " << colorSecond[1] << " " << colorSecond[2] << " " << colorSecond[3] << endl;
+        cout << colorMinute[0] << " " << colorMinute[1] << " " << colorMinute[2] << " " << colorMinute[3] << endl;
+        cout << colorHour[0] << " " << colorHour[1] << " " << colorHour[2] << " " << colorHour[3] << endl;
 
-    if (key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
-        cout << "Input Time : \n";
-        cout << "Jam : ";
-        cin >> Hour;
-
-        cout << "Menit : ";
-        cin >> Minute;
-
-        cout << "Detik : ";
-        cin >> Second;
-
-        float hour = Hour * 3600;
-        float minute = Minute * 60;
-        float second = Second;
-
-        glfwSetTime(hour + minute + second);
-        cout << "Time Changed Successfully" << endl;
+        glUniform4f(colorSecondLoc, colorSecond[0], colorSecond[1], colorSecond[2], colorSecond[3]);
+        glUniform4f(colorMinuteLoc, colorMinute[0], colorMinute[1], colorMinute[2], colorMinute[3]);
+        glUniform4f(colorHourLoc, colorMinute[0], colorHour[1], colorHour[2], colorHour[3]);
     }
 }
 
@@ -105,7 +115,7 @@ int main(void)
     if (!glfwInit())
         return -1;
 
-    window = glfwCreateWindow(640, 640, "JAM BIG BANG", NULL, NULL);
+    window = glfwCreateWindow(620, 620, "JAM BIG BENG", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -114,7 +124,7 @@ int main(void)
     
     glfwMakeContextCurrent(window);
 
-    glfwSetKeyCallback(window, keyFowardBackward);
+    glfwSetKeyCallback(window, keyCallBack);
 
     GLenum err = glewInit();
 
@@ -180,9 +190,9 @@ int main(void)
         deltaTime = (currentTime - lastTime) * speed;
         lastTime = currentTime;
 
-        currentSecondPointer += (deltaTime * velocitySecondPointer);
-        currentMinutePointer += (deltaTime * velocityMinutePointer);
-        currentHourPointer += (deltaTime * velocityHourPointer);
+        currentSecondPointer += deltaTime * velocitySecondPointer;
+        currentMinutePointer += deltaTime * velocityMinutePointer;
+        currentHourPointer += deltaTime * velocityHourPointer;
 
         glUniform1f(currentSecondPointerLoc, currentSecondPointer * 3.14159265f / 180.0f);
         glUniform1f(currentMinutePointerLoc, currentMinutePointer * 3.14159265f / 180.0f);

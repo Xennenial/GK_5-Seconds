@@ -1,6 +1,6 @@
 #version 330
 
-layout (location = 0) in vec2 pos;
+layout (location = 0) in vec3 pos;
 varying vec2 vPos;
 
 void main()
