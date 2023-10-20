@@ -44,7 +44,6 @@ void keyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods
     }
     //key D to move one minute foward
     if (key == GLFW_KEY_A && action == GLFW_PRESS) {
-        cout << "Minute Backward" << endl;
         glfwSetTime(currentTime - 60);
     }
     //key RIGHT ARROW to speed up the clock

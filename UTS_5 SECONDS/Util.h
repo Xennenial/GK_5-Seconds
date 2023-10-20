@@ -9,6 +9,7 @@ using namespace std;
 string readFile(string fileName)
 {
 	cout << "Reading FIle " << fileName << endl;
+
 	//to read every fileText we made
 	string fileText;
 	ifstream myFile(fileName);

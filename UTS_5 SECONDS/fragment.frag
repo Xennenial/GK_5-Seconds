@@ -28,7 +28,6 @@ void main()
 		//giving color
 		 color = colorHour;
 	}
-
 	
 	//calculates the dot product between the normalized vPos and the hands direction vector
 	float dotMinute = dot(normalize(vPos), vec2(0.6 * cos(currentMinutePointer), 0.6 * sin(currentMinutePointer)));
