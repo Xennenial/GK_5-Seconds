@@ -12,30 +12,40 @@ layout (location = 0) out vec4 color;
 varying vec2 vPos;
 
 void main()
-{
+{	
+	//background color white
 	color = vec4(1.0, 1.0, 1.0, 1.0);
 	
+	//calculates the distance of the current point (vPos) from the center point
 	float distance = length(vPos);
 
+	//calculates the dot product between the normalized vPos and the hands direction vector
+	float dotHour = dot(normalize(vPos), vec2(0.9 * cos(currentHourPointer), 0.9 * sin(currentHourPointer)));
+	
 	//drawing hour
-	float dotHour = dot(normalize(vPos), vec2(0.8 * cos(currentHourPointer), 0.8 * sin(currentHourPointer)));
-	if (distance <= 0.9 && distance >= 0.8 && dotHour < 0.8 * sin(currentHourPointer))
+	if (distance <= 0.9 && distance >= 0.8 && dotHour < 0.9 * sin(currentHourPointer))
 	{
-		 color = vec4(1.0, 0.0, 0.0, 1.0);
+		//giving color
+		 color = colorHour;
 	}
 
-	//drawing minute
+	
+	//calculates the dot product between the normalized vPos and the hands direction vector
 	float dotMinute = dot(normalize(vPos), vec2(0.6 * cos(currentMinutePointer), 0.6 * sin(currentMinutePointer)));
+	//drawing minute
 	if (distance <= 0.6 && distance >= 0.5 && dotMinute < 0.6 * sin(currentMinutePointer))
 	{
-		color = vec4(0.0, 1.0, 0.0, 1.0);
+		//giving color
+		color = colorMinute;
 	}
 
-	//drawing second
+	//calculates the dot product between the normalized vPos and the hands direction vector
 	float dotSecond = dot(normalize(vPos), vec2(cos(currentSecondPointer), sin(currentSecondPointer)));
+	//drawing second
 	if (distance <= 0.3 && distance >= 0.2 && dotSecond < sin(currentSecondPointer))
-	{
-			color = vec4(0.0, 0.0, 1.0, 1.0);
+	{		
+			//giving color
+			color = colorSecond;
 	}
 
 }

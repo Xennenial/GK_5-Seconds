@@ -37,13 +37,13 @@ void keyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods
         cout << "Hour Backward" << endl;
         glfwSetTime(currentTime - 3600);
     }
-    //key A to move one minute foward
-    if (key == GLFW_KEY_A && action == GLFW_PRESS) {
+    //key A to move one minute backward
+    if (key == GLFW_KEY_D && action == GLFW_PRESS) {
         cout << "Minute Foward" << endl;
         glfwSetTime(currentTime + 60);
     }
-    //key D to move one minute backward
-    if (key == GLFW_KEY_D && action == GLFW_PRESS) {
+    //key D to move one minute foward
+    if (key == GLFW_KEY_A && action == GLFW_PRESS) {
         cout << "Minute Backward" << endl;
         glfwSetTime(currentTime - 60);
     }
@@ -180,20 +180,33 @@ int main(void)
     glLinkProgram(program);
 
     glUseProgram(program);
+
+    //get the location of the uniform variable
     GLint currentSecondPointerLoc = glGetUniformLocation(program, "currentSecondPointer");
     GLint currentMinutePointerLoc = glGetUniformLocation(program, "currentMinutePointer");
     GLint currentHourPointerLoc = glGetUniformLocation(program, "currentHourPointer");
 
+    //get the location of the uniform variable and send color data to the shader
+    colorSecondLoc = glGetUniformLocation(program, "colorSecond");
+    glUniform4f(colorSecondLoc, colorSecond[0], colorSecond[1], colorSecond[2], colorSecond[3]);
+    colorMinuteLoc = glGetUniformLocation(program, "colorMinute");
+    glUniform4f(colorMinuteLoc, colorMinute[0], colorMinute[1], colorMinute[2], colorMinute[3]);
+    colorHourLoc = glGetUniformLocation(program, "colorHour");
+    glUniform4f(colorHourLoc, colorHour[0], colorHour[1], colorHour[2], colorHour[3]);
+
     while (!glfwWindowShouldClose(window))
     {
+        //time update
         currentTime = glfwGetTime();
         deltaTime = (currentTime - lastTime) * speed;
         lastTime = currentTime;
 
+        //update the position of the clock hands
         currentSecondPointer += deltaTime * velocitySecondPointer;
         currentMinutePointer += deltaTime * velocityMinutePointer;
         currentHourPointer += deltaTime * velocityHourPointer;
 
+        //Send the position of the clock hands to the shader
         glUniform1f(currentSecondPointerLoc, currentSecondPointer * 3.14159265f / 180.0f);
         glUniform1f(currentMinutePointerLoc, currentMinutePointer * 3.14159265f / 180.0f);
         glUniform1f(currentHourPointerLoc, currentHourPointer * 3.14159265f / 180.0f);
