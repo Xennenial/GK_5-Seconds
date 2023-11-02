@@ -2,7 +2,7 @@
 
 float velocitySecondPointer = -3.0f;
 float velocityMinutePointer = -0.05f;
-float velocityHourPointer = -0.0042222222f;
+float velocityHourPointer = -0.004166666666f;
 float speed = 1.0f;
 float tempspeed = 1.0f;
 
